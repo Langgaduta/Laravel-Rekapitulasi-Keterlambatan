@@ -18,20 +18,28 @@ use App\Http\Controllers\StudentsController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::middleware(['isGuest'])->group(function () {
-    Route::get('/login', [UsersController::class, 'login'])->name('login');
+    Route::get('/', function () {
+        return view('login');
+    })->name('login');
     Route::post('/login', [UsersController::class, 'loginAuth'])->name('loginAuth');
 });
 
 Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
 
+Route::get('/error-permission', function () {
+    return view('errors.permission');
+})->name('errors.permission');
 
-Route::middleware(['isLogin','isAdmin'])->group(function () {
-    Route::get('/', function () {
-        return view('home');
-    });
-    
-    Route::get('/', [StudentsController::class, 'count'])->name('count');
+Route::middleware(['isLogin'])->group(function () {
+    Route::get('/dashboardAdmin', [StudentsController::class, 'dashboardAdmin'])->name('dashboardAdmin');
+    Route::get('/dashboardPs', [StudentsController::class, 'dashboardPs'])->name('dashboardPs');
+});
+
+
+Route::middleware(['isLogin', 'isAdmin'])->group(function () {
+    Route::get('/dashboardAdmin', [StudentsController::class, 'dashboardAdmin'])->name('dashboardAdmin');
     Route::prefix('/lates')->name('lates.')->group(function () {
         Route::get('/index', [LatesController::class, 'index'])->name('index');
         Route::get('/cetak_pdf/{nis}', [LatesController::class, 'cetak_pdf'])->name('cetak_pdf');
@@ -45,7 +53,7 @@ Route::middleware(['isLogin','isAdmin'])->group(function () {
         Route::delete('/{id}', [LatesController::class, 'destroy'])->name('delete');
         Route::get('/detail/{nis}', [LatesController::class, 'detail'])->name('detail');
     });
-    
+
     Route::prefix('/rombel')->name('rombel.')->group(function () {
         Route::get('/index', [RombelsController::class, 'index'])->name('index');
         Route::get('/create', [RombelsController::class, 'create'])->name('create');
@@ -54,7 +62,7 @@ Route::middleware(['isLogin','isAdmin'])->group(function () {
         Route::patch('/{id}', [RombelsController::class, 'update'])->name('update');
         Route::delete('/{id}', [RombelsController::class, 'destroy'])->name('delete');
     });
-    
+
     Route::prefix('/user')->name('user.')->group(function () {
         Route::get('/index', [UsersController::class, 'index'])->name('index');
         Route::get('/create', [UsersController::class, 'create'])->name('create');
@@ -79,11 +87,10 @@ Route::middleware(['isLogin','isAdmin'])->group(function () {
         Route::patch('/{id}', [StudentsController::class, 'update'])->name('update');
         Route::delete('/{id}', [StudentsController::class, 'destroy'])->name('destroy');
     });
-    
 });
 
-Route::middleware(['isLogin','isUser'])->group(function () {
-    Route::get('/dashboardPs', [studentsController::class, 'dashboardPs'])->name('dashboardPs');
+Route::middleware(['isLogin', 'isUser'])->group(function () {
+    Route::get('/dashboardPs', [StudentsController::class, 'dashboardPs'])->name('dashboardPs');
     Route::prefix('/latesPs')->name('latesPs.')->group(function () {
         Route::get('/indexPs', [LatesController::class, 'indexPs'])->name('indexPs');
         Route::get('/detailPs/{nis}', [LatesController::class, 'detailPs'])->name('detailPs');
@@ -95,5 +102,3 @@ Route::middleware(['isLogin','isUser'])->group(function () {
         Route::get('/dataSiswa', [LatesController::class, 'dataSiswa'])->name('dataSiswa');
     });
 });
-
-

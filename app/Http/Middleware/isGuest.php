@@ -21,15 +21,16 @@ class isGuest
 
             switch ($role) {
                 case 'admin':
-                    return redirect('/');
+                    return redirect('/dashboardAdmin')->with('alreadyAccess', 'Anda sudah login!');
                     break;
                 case 'ps':
-                    return redirect('/dashboardPs');
+                    return redirect('/dashboardPs')->with('alreadyAccess', 'Anda sudah login!');
                     break;
                 default:
                     return redirect('/');
             }
         }
+
 
         return $next($request);
     }

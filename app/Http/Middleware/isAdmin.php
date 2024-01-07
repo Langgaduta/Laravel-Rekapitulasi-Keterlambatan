@@ -16,11 +16,11 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role === 'admin') {
+        if (Auth::user()->role === 'admin') {
             return $next($request);
         } else {
-            return redirect('/login')->with('error', 'Unauthorized. Insufficient role.');
+            // return redirect('/login')->with('error', 'Unauthorized. Insufficient role.');
+            return redirect()->route('errors.permission');
         }
-        
     }
 }

@@ -123,18 +123,18 @@ class UsersController extends Controller
         if (Auth::attempt($user)) {
             $user = Auth::user();
             if ($user->role == 'ps') {
-                return redirect('/dashboardPs')->with('success', 'Login Success');
+                return redirect('/dashboardPs')->with('alreadyAccess', 'Login Berhasil!');
             } elseif ($user->role == 'admin') {
-                return redirect('/')->with('success', 'Login Success');
+                return redirect('/dashboardAdmin')->with('alreadyAccess', 'Login Berhasil!');
             }
         } else {
-            return back()->with('error', 'Email or Password Invalid');
+            return back()->with('failed', 'Email atau Password Salah!');
         }
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('/login')->with('success', 'Logout Success');
+        return redirect('/')->with('logout', 'Anda telah logout!');
     }
 }

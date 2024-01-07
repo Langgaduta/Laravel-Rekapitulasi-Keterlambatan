@@ -1,9 +1,19 @@
 @extends('layouts.template')
 
 @section('content')
+
+    @if (Session::get('success'))
+        <div class="alert alert-success">{{ Session::get('success') }}</div>
+    @endif
+
+    @if (Session::get('deleted'))
+        <div class="alert alert-warning">{{ Session::get('deleted') }}</div>
+    @endif
+
     <a href="{{ route('lates.create') }}">
         <button class="btn btn-primary mt-3">Tambah Data</button></a>
-    <a href="{{ route('lates.export_excel') }}"><button class="btn btn-info mt-3 text-light">Export Data Keterlambatan</button></a>
+    <a href="{{ route('lates.export_excel') }}"><button class="btn btn-info mt-3 text-light">Export Data
+            Keterlambatan</button></a>
     <div class="container mt-4">
 
         <ul class="nav nav-tabs" id="myTabs">
@@ -99,7 +109,8 @@
                                 </td>
                                 <td>
                                     @if ($data['jumlahKeterlambatan'] >= 3)
-                                        <a href="{{ route('lates.download_pdf', $nis) }}" class="btn btn-primary">Cetak Surat Pernyataan</a>
+                                        <a href="{{ route('lates.download_pdf', $nis) }}" class="btn btn-primary">Cetak
+                                            Surat Pernyataan</a>
                                     @endif
                                 </td>
                             </tr>

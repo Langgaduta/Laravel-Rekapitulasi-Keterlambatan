@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'isAdmin' => \App\Http\Middleware\isAdmin::class,
         'isUser' => \App\Http\Middleware\isUser::class,
         'isGuest' => \App\Http\Middleware\isGuest::class,
+        'randomRequest' => \App\Http\Middleware\RandomRequestHandler::class,
     ];
 }

@@ -19,7 +19,8 @@ class isLogin
         if (Auth::check()) {
             return $next($request);
         } else {
-            return redirect()->route('login')->with('error', 'Unauthorized. Please Login First');
+            // return redirect()->route('login')->with('error', 'Unauthorized. Please Login First');
+            return redirect()->route('login')->with('canAccess', 'Silahkan login terlebih dahulu!');
         }
     }
 }

@@ -1,6 +1,9 @@
 @extends('layouts.template')
 
 @section('content')
+    @if (Session::get('alreadyAccess'))
+        <div class="alert alert-primary">{{ Session::get('alreadyAccess') }}</div>
+    @endif
     <div class="container-fluid" style="color:rgb(0, 64, 137)">
         <div class="container mt-4">
             <div class="row mb-4">
@@ -10,7 +13,7 @@
             </div>
             <div class="row" style="color:rgb(0, 64, 137)">
                 <div class="col-lg-6 mb-4">
-                    <div class="card h-200 text-dark shadow" style="background-color:#ffffff;">
+                    <div class="card h-200 text-dark shadow card-hover" style="background-color:#ffffff;">
                         <div class="card-body" style="color:rgb(0, 64, 137)">
                             <h5 class="card-title">Peserta Didik</h5>
                             <div class="row align-items-center mt-2">
@@ -25,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 mb-4">
-                    <div class="card h-200 text-dark shadow" style="background-color:#ffffff;">
+                    <div class="card h-200 text-dark shadow card-hover" style="background-color:#ffffff;">
                         <div class="card-body" style="color:rgb(0, 64, 137)">
                             <h5 class="card-title">Administrator</h5>
                             <div class="row align-items-center mt-2">
@@ -40,7 +43,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 mb-4">
-                    <div class="card h-200 text-dark shadow" style="background-color:#ffffff;">
+                    <div class="card h-200 text-dark shadow card-hover" style="background-color:#ffffff;">
                         <div class="card-body" style="color:rgb(0, 64, 137)">
                             <h5 class="card-title">Pembimbing Siswa</h5>
                             <div class="row align-items-center mt-2">
@@ -57,7 +60,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 mb-4">
-                    <div class="card h-200 text-dark shadow" style="background-color:#ffffff;">
+                    <div class="card h-200 text-dark shadow card-hover" style="background-color:#ffffff;">
                         <div class="card-body" style="color:rgb(0, 64, 137)">
                             <h5 class="card-title">Rombel</h5>
                             <div class="row align-items-center mt-2">
@@ -72,7 +75,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 mb-4">
-                    <div class="card h-200 text-dark shadow" style="background-color:#ffffff;">
+                    <div class="card h-200 text-dark shadow card-hover" style="background-color:#ffffff;">
                         <div class="card-body" style="color:rgb(0, 64, 137)">
                             <h5 class="card-title">Rayon</h5>
                             <div class="row align-items-center mt-2">
@@ -90,3 +93,12 @@
         </div>
     </div>
 @endsection
+
+<style>
+
+    .card:hover {
+    transition: 0.3s; 
+    filter: brightness(90%);
+}
+
+</style>

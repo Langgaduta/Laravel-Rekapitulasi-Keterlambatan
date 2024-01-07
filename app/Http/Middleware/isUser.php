@@ -11,11 +11,12 @@ class isUser
 {
     public function handle(Request $request, Closure $next)
     {
-        
-        if(Auth::user()->role == 'ps') {
+
+        if (Auth::user()->role == 'ps') {
             return $next($request);
         } else {
-            return redirect('/login')->with('error', 'Unauthorized. Insufficient role.');
+            // return redirect('/login')->with('error', 'Unauthorized. Insufficient role.');
+            return redirect()->route('errors.permission');
         }
     }
 }

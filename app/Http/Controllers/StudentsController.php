@@ -42,7 +42,7 @@ class StudentsController extends Controller
         return view('student.index', compact('student', 'rombel', 'rayon'));
     }
 
-    public function count()
+    public function dashboardAdmin()
     {
         $jmlStudent = students::count();
         $jmlRombel = rombels::count();

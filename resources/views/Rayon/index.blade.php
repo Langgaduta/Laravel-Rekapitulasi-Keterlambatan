@@ -1,6 +1,15 @@
 @extends('layouts.template')
 
 @section('content')
+
+@if (Session::get('success'))
+<div class="alert alert-success">{{ Session::get('success') }}</div>
+@endif
+
+@if (Session::get('deleted'))
+<div class="alert alert-warning">{{ Session::get('deleted') }}</div>
+@endif
+
 <h5 style="color:rgb(0, 64, 137)" class="mb-3">Data Rayon</h5>
 <a href="{{ route('rayon.create') }}"><button class="btn btn-primary mt-3">Tambah Data</button></a>
     <br>
